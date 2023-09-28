@@ -16,9 +16,8 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button variant="text">hahaah</Button>
-            <Button variant="contained">Contained</Button>
-            <Button variant="outlined">Outlined</Button>
+            <Button variant="contained">我的第一个Next项目</Button>
+            <Button variant="outlined">持续迭代</Button>
           </a>
         </div>
       </div>
@@ -26,11 +25,10 @@ export default function Home() {
       <div className={styles.center}>
         <Image
           className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src="/favicon-192x192.png"
+          width={192}
+          height={192}
+          alt=""
         />
       </div>
 
