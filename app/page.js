@@ -11,14 +11,8 @@ export default function Home() {
           <code className={styles.code}>src/app/page.js</code>
         </p>
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="contained">我的第一个Next项目</Button>
-            <Button variant="outlined">持续迭代</Button>
-          </a>
+          <Button variant="contained">我的第一个Next项目</Button>
+          <Button variant="outlined">持续迭代</Button>
         </div>
       </div>
 
