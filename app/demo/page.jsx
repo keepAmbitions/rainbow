@@ -1,100 +1,118 @@
-'use client'
-import { useMemo, useState } from 'react';
+"use client";
+import { useMemo, useState, useEffect } from "react";
+import { TextField, IconButton } from "@mui/material";
+import { rateMap } from "./tinyMap";
+import CurrencySelect from "./components/CurrencySelecet";
+import { SwapVert, SwapHoriz } from "@mui/icons-material";
 
-// import CurrencySelect from '@/components/currencySelect';
-
-import style from './index.module.less';
-
-const rateMap = {
-  CNY: {
-    CNY: 1,
-    SGD: 7,
-    USD: 6,
-    EUR: 5,
-    GBP: 4,
-    JPY: 3,
-  },
-  SGD: {
-    CNY: 1,
-    SGD: 71,
-    USD: 61,
-    EUR: 51,
-    GBP: 41,
-    JPY: 31,
-  },
-  USD: {
-    CNY: 1,
-    SGD: 17,
-    USD: 16,
-    EUR: 15,
-    GBP: 14,
-    JPY: 13,
-  },
-  EUR: {
-    CNY: 1,
-    SGD: 17,
-    USD: 16,
-    EUR: 15,
-    GBP: 14,
-    JPY: 13,
-  },
-  GBP: {
-    CNY: 1,
-    SGD: 7,
-    USD: 6,
-    EUR: 5,
-    GBP: 4,
-    JPY: 3,
-  },
-  JPY: {
-    CNY: 1,
-    SGD: 7,
-    USD: 6,
-    EUR: 5,
-    GBP: 4,
-    JPY: 3,
-  },
-};
+import style from "./index.module.css";
 
 const CurrencyConvertor = () => {
-  const [fromCurrency, setFromCurrency] = useState('CNY');
-  const [toCurrency, setToCurrency] = useState('USD');
-  const [toAmount, setToAmount] = useState(1);
-  const [fromAmount, setFromAmount] = useState(1);
+  const [fromCurrency, setFromCurrency] = useState("CNY");
+  const [toCurrency, setToCurrency] = useState("USD");
+  const [fromAmount, setFromAmount] = useState("1");
+  const [toAmount, setToAmount] = useState("");
+  // const [rateMap, setRateMap] = useState(rateMap);
 
-  // const rate = useMemo(() => rateMap[fromCurrency][toCurrency], [fromCurrency, toCurrency]);
-  const rate = useMemo(() => {
-    console.log(fromCurrency, toCurrency, 'kkkkk');
-    // 汇率改变时调用,重新计算toAmount
-    const tempRate = rateMap[fromCurrency][toCurrency];
-    setToAmount(fromAmount * tempRate);
-    return tempRate;
-  }, [fromCurrency, toCurrency, fromAmount]);
+  // useEffect(() => {
+  //   getExchangeRate({ effectiveDate: '2023-09-27' })
+  //     .then((res) => {
+  //       const { code, data, msg } = res;
+  //       if (code === 10000) {
+  //         console.log(data, 'getExchangeRate');
+  //         setRateMap(data);
+  //       } else {
+  //         message.error(msg);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log('查询汇率接口报错', err);
+  //     });
+  // }, []);
 
-  const handleFromAmountChange = (e) => {
-    setFromAmount(e.target.value);
-    setToAmount(e.target.value * rate);
-  };
+  // rateMap 取自接口，一开始没有，所以先不计算, 汇率改变时调用,重新计算toAmount
+  const rate = useMemo(
+    () => (rateMap ? rateMap[fromCurrency][toCurrency] : ""),
+    [fromCurrency, toCurrency]
+  );
 
-  const handleToAmountChange = (e) => {
-    setToAmount(e.target.value);
-    setFromAmount(e.target.value / rate);
-  };
+  useMemo(() => {
+    // 监听 汇率变化，然后改变 toAmount
+    setFromAmount((preFrom) => {
+      // let calc = toFixed(Number(preFrom * rate), 4);
+      let calc = preFrom * rate;
+      calc = calc === "0.0000" ? "0" : calc;
+      setToAmount((pre) => (calc === "NaN" ? pre : calc));
+      return preFrom;
+    });
+  }, [rate]);
 
   const swapCurrency = () => {
     setToCurrency(fromCurrency);
     setFromCurrency(toCurrency);
   };
 
+  const notNumber = (value) => /[^(\d|.)]/g.test(value);
+  // 检查数值中是否有多个小数点
+  const checkValDecimalPoint = (value) =>
+    value.split("").filter((i) => i === ".").length > 1;
+
+  const hitRules = (value) => {
+    console.log(value, "eee");
+    const rules = [notNumber, checkValDecimalPoint];
+    return rules.some((rlue) => rlue(value));
+  };
+
+  const handleFromInput = (e) => {
+    // 命中规则的输入不进去
+    if (hitRules(e.target.value)) {
+      return;
+    }
+    setFromAmount(e.target.value);
+    // 结果保留4位小数
+    // let calc = toFixed(Number(e.target.value * rate), 4);
+    let calc = e.target.value * rate;
+    calc = calc === "0.0000" ? "0" : calc;
+    setToAmount((pre) => (calc === "NaN" ? pre : calc));
+  };
+
+  const handleToInput = (e) => {
+    if (hitRules(e.target.value)) {
+      return;
+    }
+    setToAmount(e.target.value);
+    // let calc = toFixed(Number(e.target.value / rate), 4);
+    let calc = e.target.value / rate;
+    calc = calc === "0.0000" ? "0" : calc;
+    setFromAmount((pre) => (calc === "NaN" ? pre : calc));
+  };
+
   return (
     <>
-      <input type="number" className={style.input} value={fromAmount} onChange={handleFromAmountChange} />
-      <div className={style.equals}>=</div>
-      <input type="number" className={style.input} value={toAmount} onChange={handleToAmountChange} />
-      <div className={style.equals}>=</div>
-      {/* <CurrencySelect value={fromCurrency} onSelect={(e) => setFromCurrency(e.value)} selectedWithFlag /> */}
-      <button onClick={swapCurrency}>swap</button>
-      {/* <CurrencySelect value={toCurrency} onSelect={(e) => setToCurrency(e.value)} selectedWithFlag /> */}
+      <div className={style.wrap}>
+        <div className={style.topRate}>
+          {`1 ${fromCurrency}`}{<IconButton onClick={swapCurrency}><SwapHoriz/></IconButton>}{`${rate} ${toCurrency}`}
+        </div>
+        <CurrencySelect currency={fromCurrency} onSelect={setFromCurrency} />
+        <TextField
+          placeholder="请输入金额"
+          onInput={handleFromInput}
+          onChange={handleFromInput}
+          value={fromAmount}
+        />
+        <div className={style.swap}>
+          <SwapVert />
+        </div>
+        <CurrencySelect currency={toCurrency} onSelect={setToCurrency} />
+        <TextField
+          placeholder="请输入金额"
+          onInput={handleToInput}
+          onChange={handleToInput}
+          value={toAmount}
+        />
+      </div>
+      {/* 这里特殊处理成了绝对定位 */}
+      <div className={style.updateTime}>更新时间: 2023-08-10 19:20:00</div>
     </>
   );
 };

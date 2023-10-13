@@ -1,8 +1,11 @@
+'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -11,8 +14,8 @@ export default function Home() {
           <code className={styles.code}>src/app/page.js</code>
         </p>
         <div>
-          <Button variant="contained">我的第一个Next项目</Button>
-          <Button variant="outlined">持续迭代</Button>
+          <Button onClick={() => router.push('/demo')} variant="contained">我的第一个Next项目</Button>
+          <Button onClick={() => router.push('/demo')} variant="outlined">持续迭代</Button>
         </div>
       </div>
 

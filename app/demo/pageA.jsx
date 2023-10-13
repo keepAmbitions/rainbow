@@ -1,7 +1,27 @@
-'use client'
+"use client";
+import { useMemo, useState, useEffect } from 'react';
 
-const Home = () => {
-  return <span>Home</span>;
+const A = () => {
+  const handleClick = () => {
+    // todo something
+  };
+  const [count, setCount] = useState(1);
+  useMemo(()=>{
+    setCount(pre=>pre*2)
+    handleClick();
+  },[])
+  return <div onClick={handleClick}>{count}</div>;
+};
+const B = () => {
+  return (
+    <div
+      onClick={() => {
+        // todo something
+      }}
+    >
+      {count}
+    </div>
+  );
 };
 
-export default Home;
+export default A;
