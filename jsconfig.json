@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".", // 绝对路径
     "paths": {
-      "@/styles/*": ["styles/*"],
-      "@/assets/*": ["assets/*"]
+      "@/*": ["app/*"],
+      "@/style/*": ["style/*"],
+      "@/assets/*": ["public/assets/*"]
     }
   }
 }

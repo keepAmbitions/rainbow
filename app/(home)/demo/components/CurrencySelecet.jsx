@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image'
 import { Select, MenuItem } from "@mui/material";
 
 const options = [
@@ -27,12 +28,8 @@ const CurrencySelect = ({ currency, onSelect }) => {
     >
       {options.map(({ value, icon }) => (
         <MenuItem key={value} value={value}>
-          {
-            <>
-              <img src={`/assets/currency/${value}.png`} width="22" />
-              <span>{value}</span>
-            </>
-          }
+          <Image src={`/assets/currency/${value}.png`} width={22} height={16} alt="nantionalFlag" />
+          <span>{value}</span>
         </MenuItem>
       ))}
     </Select>
