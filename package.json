@@ -13,6 +13,8 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.13",
     "@mui/material": "^5.14.11",
+    "dayjs": "^1.11.10",
+    "mongoose": "7.6.5",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
