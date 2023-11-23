@@ -11,5 +11,6 @@ export async function GET(request) {
 export async function POST(request) {
   await connectDB();
   const res = await request.json()
+  console.log('debug--33', res);
   return Response.json({ res })
 }

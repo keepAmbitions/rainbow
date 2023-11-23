@@ -1,6 +1,6 @@
 "use client";
 import Paper from "@mui/material/Paper";
-const WelcomeHome = () => {
+const Container = () => {
   return (
     <div
       onClick={() => {
@@ -8,10 +8,10 @@ const WelcomeHome = () => {
       }}
     >
       <Paper elevation={3} sx={{ width: "100%", height: "120vh", bgcolor: "antiquewhite" }}>
-        WelcomeHome
+        Container
       </Paper>
     </div>
   );
 };
 
-export default WelcomeHome;
+export default Container;

@@ -20,7 +20,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import theme from "@/style/palette";
 import styles from "./index.module.css";
-import GlobalStyles from "@mui/material/GlobalStyles";
 
 export default function PCLayout({ children }) {
   const [selectedIndex, setSelectedIndex] = useState(1);
