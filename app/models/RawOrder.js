@@ -3,7 +3,7 @@ import { baseSchema, option } from './help.js'
 const RawSubOrderSchema = mongoose.Schema({
   requestBusinessNo: {
     type: String,
-    require: true
+    // require: true
   },
   step: String,
   itemName: String,

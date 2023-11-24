@@ -8,12 +8,31 @@ const WelcomeHome = () => {
   const [outValue, setOutValue] = useState("");
   const postData = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/raw-order", {
+      // https://aaa.freeask.asia
+      const res = await fetch("/api/raw-order", {
         method: "POST",
-        body: JSON.stringify({ inValue }),
+        body: JSON.stringify({ requestBusinessNo: inValue }),
       });
-      console.log("debug--11", res);
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const res = await fetch(`/api/raw-order?requestBusinessNo=${inValue}`)
+      
+      if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error('Failed to fetch data')
+      }
+      const data = await res.json()
+      console.log('debug--11', data);
+      
+      setOutValue(data.requestBusinessNo)
+    } catch (err) {
+      
+    };
   };
   return (
     <Paper
@@ -43,6 +62,9 @@ const WelcomeHome = () => {
           setOutValue(event.target.value);
         }}
       />
+      <Button variant="contained" onClick={getData}>
+        查询
+      </Button>
     </Paper>
   );
 };
