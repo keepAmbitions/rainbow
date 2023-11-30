@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { baseSchema, option } from './help.js'
 const RawSubOrderSchema = mongoose.Schema({
-  step: String, // 阶段（只有履约订单才有值，微包必传）
+  step: Number, // 阶段（只有履约订单才有值，微包必传）
   itemPrice: String, // 商品/款项金额
   commissionDiscountPrice: String, // 服务费优惠后金额
   commission: String, // 服务费
@@ -22,12 +22,12 @@ const RawOrderSchema = mongoose.Schema({
   sourceConsignee: String, // 买家收货人/雇主
   vvIdBuyer: String, // 买方微微号
   vvIdSeller: String, // 卖联微微号
-  sourceType: String, // 买家身份（0：企业，1、个人
+  sourceType: Number, // 买家身份（0：企业，1、个人
   targetSellerId: String, // 卖家/服务使用户编号
   targetSellerName: String, // 卖家收货人/服务商名称
-  sellerType: String, // 卖家身份（0：企业，1、个人
+  sellerType: Number, // 卖家身份（0：企业，1、个人
 
-  detailOrderCount: String, // 订单明细数量
+  detailOrderCount: Number, // 订单明细数量
   subOrder: [RawSubOrderSchema],
 }, option)
 
