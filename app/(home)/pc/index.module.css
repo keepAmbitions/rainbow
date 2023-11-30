@@ -6,7 +6,14 @@
   padding: 1em;
   height: 100vh;
   min-height: 100vh;
+  position: relative;
   /* background: url(https://gd-hbimg.huaban.com/6329686a8d4f39aba408aa0b479b8c4094bc141f29e936-HUBpGw) no-repeat center/cover; */
   /* background-color: #f0d9c2; */
   /* background-color: #f9f9e6; */
+}
+.stickyWrap {
+  position: sticky;
+  bottom: 1px;
+  left: 1px;
+  background-color: tan;
 }
