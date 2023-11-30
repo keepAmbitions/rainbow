@@ -20,8 +20,8 @@ const RawOrderSchema = mongoose.Schema({
 
   sourceUserId: String, // 买家收货人/雇主用户编号
   sourceConsignee: String, // 买家收货人/雇主
-  vvIdBuyer: '', // 买方微微号
-  vvIdSeller: '', // 卖联微微号
+  vvIdBuyer: String, // 买方微微号
+  vvIdSeller: String, // 卖联微微号
   sourceType: String, // 买家身份（0：企业，1、个人
   targetSellerId: String, // 卖家/服务使用户编号
   targetSellerName: String, // 卖家收货人/服务商名称
