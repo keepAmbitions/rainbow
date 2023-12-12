@@ -5,6 +5,7 @@ const RawSubOrderSchema = mongoose.Schema({
   itemPrice: String, // 商品/款项金额
   commissionDiscountPrice: String, // 服务费优惠后金额
   commission: String, // 服务费
+  itemType: Number, // 商品类型 0:虚拟商品、1：实物商品
 })
 const RawOrderSchema = mongoose.Schema({
   ...baseSchema,
