@@ -27,6 +27,15 @@ const RawOrderSchema = mongoose.Schema({
   targetSellerName: String, // 卖家收货人/服务商名称
   sellerType: Number, // 卖家身份（0：企业，1、个人
 
+  businessType: String, // 业务类型，请传入：WB
+  paymentMethod: Number, // 支付方式（0：app，1：pc）
+  country: String, // 订单来源国家 CN:中国
+  currencyType: String, // 订单币种
+  contractUrl: String, // 合同url
+  contractId: String, // 合同编号
+  targetPhone: String, // 卖联系方式
+  sourcePhone: String, // 买方联系方式
+
   detailOrderCount: Number, // 订单明细数量
   subOrder: [RawSubOrderSchema],
 }, option)
