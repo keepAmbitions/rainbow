@@ -8,6 +8,7 @@ const RawSubOrderSchema = mongoose.Schema({
 })
 const RawOrderSchema = mongoose.Schema({
   ...baseSchema,
+  businessType: String, // 业务类型，请传入：WB
   requestBusinessNo: { // 请求流水号
     type: String,
     require: true
