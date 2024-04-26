@@ -1,3 +1,4 @@
+// 语料
 const languageArr = [
     { id: 'LMID_01', cn: '确定' },
     { id: 'LMID_02', cn: '取消' },

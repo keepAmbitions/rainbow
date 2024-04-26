@@ -1,5 +1,6 @@
 "use client";
-// 这是平级共享的布局
+// home目录下所有嵌套的目录共享此布局
+// 这个布局是通过http://localhost:3000/这个访问的，将来充当网站主页
 import { useState } from "react";
 // import { ThemeProvider } from "@mui/material/styles";
 // import Button from "@mui/material/Button";
@@ -21,7 +22,7 @@ import { useState } from "react";
 // import theme from "@/style/palette";
 import styles from "./index.module.css";
 
-export default function PCLayout({ children }) {
+export default function HomeLayout({ children }) {
   // const [selectedIndex, setSelectedIndex] = useState(1);
 
   // const [auth, setAuth] = useState(true);
