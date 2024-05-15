@@ -26,7 +26,6 @@ const TimerPage = () => {
     setTime(0);
   };
 
-  var arr = [3,4,1,2,21,5,15,6,63];
   useEffect(() => {
     return () => {
       if (timer) {
